@@ -1,0 +1,4 @@
+/usr/local/Cellar/cmake/3.6.1/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/juryverrigni/ClionProjects/ModelViewer
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/juryverrigni/ClionProjects/ModelViewer/cmake-build-debug
