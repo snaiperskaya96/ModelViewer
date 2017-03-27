@@ -23,7 +23,7 @@ bool OpenGl::InitialiseOpenGl() {
     glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 2);
     glfwWindowHint (GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint (GLFW_SAMPLES, 0);
+    glfwWindowHint (GLFW_SAMPLES, 4);
 
 //	GLFWmonitor* mon = glfwGetPrimaryMonitor ();
 //	const GLFWvidmode* vmode = glfwGetVideoMode (mon);
@@ -45,6 +45,10 @@ bool OpenGl::InitialiseOpenGl() {
     // start GLEW extension handler
     glewExperimental = GL_TRUE;
     glewInit ();
+
+    glEnable (GL_CULL_FACE); // cull face
+    glCullFace (GL_BACK); // cull back face
+    glFrontFace (GL_CW); // GL_CCW for counter clock-wise
 
     // get version info
     const GLubyte* renderer = glGetString (GL_RENDERER); // get renderer string
