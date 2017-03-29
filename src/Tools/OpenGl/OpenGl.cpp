@@ -19,6 +19,7 @@ bool OpenGl::InitialiseOpenGl() {
     }
 
     // uncomment these lines if on Apple OS X
+    glfwWindowHint (GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
     glfwWindowHint (GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 2);
     glfwWindowHint (GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
@@ -42,19 +43,16 @@ bool OpenGl::InitialiseOpenGl() {
     glfwSetWindowSizeCallback (Window, &OpenGl::GlfwWindowSizeCallback);
     glfwMakeContextCurrent (Window);
 
-    // start GLEW extension handler
     glewExperimental = GL_TRUE;
     glewInit ();
 
-    glEnable (GL_CULL_FACE); // cull face
-    glCullFace (GL_BACK); // cull back face
-    glFrontFace (GL_CW); // GL_CCW for counter clock-wise
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
 
-    // get version info
-    const GLubyte* renderer = glGetString (GL_RENDERER); // get renderer string
-    const GLubyte* version = glGetString (GL_VERSION); // version as a string
-    Debug::GlLog ("Renderer: %s\n", renderer);
-    Debug::GlLog ("renderer: %s\nversion: %s\n", renderer, version);
+    glEnable (GL_CULL_FACE);
+    glCullFace (GL_BACK);
+    glFrontFace (GL_CW);
+
     Debug::PrintGlLog(true);
 
     Initialised = true;

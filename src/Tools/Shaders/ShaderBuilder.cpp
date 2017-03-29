@@ -5,6 +5,11 @@
 #include "ShaderBuilder.h"
 
 GLuint ShaderBuilder::BuildShader(GLenum ShaderType, const char* ShaderName) {
+    for (Shader &S : ShaderList) {
+        if (S.Name == ShaderName && S.ShaderType == ShaderType) {
+            return S.ShaderId;
+        }
+    }
     const char* Directory;
 
     if (ShaderType == GL_VERTEX_SHADER) {
@@ -24,13 +29,15 @@ GLuint ShaderBuilder::BuildShader(GLenum ShaderType, const char* ShaderName) {
         ShaderText += FileRow + "\n";
     }
 
-    GLuint Shader = glCreateShader(ShaderType);
+    GLuint S = glCreateShader(ShaderType);
     const char* ShaderCharArray = ShaderText.c_str();
 
-    glShaderSource(Shader, 1, &ShaderCharArray, NULL);
-    glCompileShader(Shader);
+    glShaderSource(S, 1, &ShaderCharArray, NULL);
+    glCompileShader(S);
 
-    return Shader;
+    ShaderList.push_back(Shader(S, ShaderName, ShaderType));
+
+    return S;
 }
 
 bool ShaderBuilder::CreateProgramme(GLuint Vertex, GLuint Fragment, GLuint *Programme) {
@@ -59,13 +66,24 @@ bool ShaderBuilder::CreateProgramme(GLuint Vertex, GLuint Fragment, GLuint *Prog
     // delete shaders here to free memory
     glDeleteShader (Vertex);
     glDeleteShader (Fragment);
+
     return true;
 }
 
 GLuint ShaderBuilder::CreateProgrammeFromFiles(const char *VertexFileName, const char *FragmentFileName) {
+    for (ShaderProgramme &P : ShaderProgrammeList) {
+        if (P.VertexFileName == VertexFileName && P.FragmentFileName == FragmentFileName) {
+            return P.ProgrammeId;
+        }
+    }
+
     GLuint Vertex, Fragment, Programme;
     Vertex = BuildShader (GL_VERTEX_SHADER, VertexFileName);
     Fragment = BuildShader (GL_FRAGMENT_SHADER, FragmentFileName);
+
     assert (CreateProgramme(Vertex, Fragment, &Programme));
+
+    ShaderProgrammeList.push_back(ShaderProgramme(Programme, Vertex, Fragment, VertexFileName, FragmentFileName));
+
     return Programme;
 }

@@ -8,6 +8,7 @@ out vec3 Colour;
 uniform mat4 ViewMatrix, ProjectionMatrix;
 
 void main() {
-    Colour = vec3(1.0, 0.0, 0.0);//VertexColour;
-    gl_Position = ViewMatrix * ProjectionMatrix * vec4(VertexPosition, 1.0);
+    Colour = VertexColour;
+    //gl_Position = ViewMatrix * ProjectionMatrix * vec4(VertexPosition, 1.0);
+    gl_Position = vec4(VertexPosition, 1.0);
 }

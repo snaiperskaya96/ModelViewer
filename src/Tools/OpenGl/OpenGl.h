@@ -5,8 +5,7 @@
 #ifndef MODELVIEWER_OPENGL_H
 #define MODELVIEWER_OPENGL_H
 
-
-#include <GLFW/glfw3.h>
+#include "ModelViewer.h"
 
 class OpenGl {
 public:
@@ -30,6 +29,9 @@ public:
     // C++11
     OpenGl(OpenGl const&) = delete;
     void operator=(OpenGl const&) = delete;
+
+    int GetWindowHeight() const { return WindowHeight; }
+    int GetWIndowWidth() const { return WindowWidth; }
 
 
 
