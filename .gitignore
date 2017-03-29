@@ -4,3 +4,16 @@ build
 *.txt.user
 .idea/*
 cmake-build-debug
+*.vcxproj
+CMakeCache.txt
+CMakeFiles
+Debug
+Makefile
+ModelViewer.*
+Shaders
+Win32
+ZERO_CHECK.*
+ALL_BUILD.*
+.vs
+cmake_install.cmake
+gl.log

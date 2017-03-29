@@ -9,6 +9,9 @@
 #include "Matrix4.h"
 #include <math.h>
 
+#define _USE_MATH_DEFINES
+#include <cmath> 
+
 #define ONE_DEG_IN_RAD (2.0 * M_PI) / 360.0 // 0.017444444
 #define ONE_RAD_IN_DEG 360.0 / (2.0 * M_PI) //57.2957795
 

@@ -144,7 +144,7 @@ void Debug::GlDebugMessageCallback(GLenum Source, GLenum Type, GLuint Id, GLenum
 void Debug::Init() {
     glfwSetErrorCallback(&Debug::GlfwErrorCallback);
     if (GLEW_KHR_debug) {
-        glDebugMessageCallback(&Debug::GlDebugMessageCallback, nullptr);
+        //glDebugMessageCallback(&GlDebugMessageCallback, nullptr);
     }
     glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
 }

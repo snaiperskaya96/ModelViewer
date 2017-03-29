@@ -10,12 +10,13 @@
 class MeshComponent {
 public:
     void SetPoints(std::vector<float> Points);
-    void SetFaces(std::vector<int> Faces);
+    void SetFaces(std::vector< std::vector<int> > Faces);
+	const std::vector< std::vector<int> > GetFacesVector() { return Faces; };
     const float* GetPoints(int& Size) { Size = Points.size(); return &Points[0]; }
-    const int* GetFaces(int& Size) { Size = Faces.size(); return &Faces[0]; }
+    //const int* GetFaces(int& Size) { Size = Faces.size(); return &Faces[0]; }
 private:
     std::vector<float> Points;
-    std::vector<int> Faces;
+	std::vector< std::vector<int> > Faces;
 };
 
 

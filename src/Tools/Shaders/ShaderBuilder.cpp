@@ -3,6 +3,7 @@
 #include <Misc/Debug.h>
 #include <assert.h>
 #include "ShaderBuilder.h"
+#include <string>
 
 GLuint ShaderBuilder::BuildShader(GLenum ShaderType, const char* ShaderName) {
     for (Shader &S : ShaderList) {
@@ -13,9 +14,9 @@ GLuint ShaderBuilder::BuildShader(GLenum ShaderType, const char* ShaderName) {
     const char* Directory;
 
     if (ShaderType == GL_VERTEX_SHADER) {
-        Directory = "/Users/juryverrigni/ClionProjects/ModelViewer/src/Shaders/Vertex/";
+        Directory = "Shaders/Vertex/";
     } else {
-        Directory = "/Users/juryverrigni/ClionProjects/ModelViewer/src/Shaders/Fragment/";
+        Directory = "Shaders/Fragment/";
     }
 
     std::string Path = Directory;

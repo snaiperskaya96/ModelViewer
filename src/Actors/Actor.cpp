@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <GL/glew.h>
 #include <Shaders/ShaderBuilder.h>
+#include <cstring>
 #include "Actor.h"
 
 Actor::Actor()

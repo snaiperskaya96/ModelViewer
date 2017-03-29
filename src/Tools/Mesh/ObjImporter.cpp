@@ -9,7 +9,7 @@ MeshComponent *ObjImporter::CreateMeshFromFileName(const char *ObjFileName) {
     std::string FileRow;
     std::string ShaderText;
     std::vector<float>* Points = new std::vector<float>;
-    std::vector<int>* Faces = new std::vector<int>;
+    std::vector< std::vector<int> >* Faces = new std::vector< std::vector<int> >;
 
     while (std::getline(File, FileRow)) {
         ParseLine(FileRow, Points, Faces);
@@ -25,7 +25,7 @@ MeshComponent *ObjImporter::CreateMeshFromFileName(const char *ObjFileName) {
     return nullptr;
 }
 
-void ObjImporter::ParseLine(std::string Line, std::vector<float> *Points, std::vector<int> *Faces) {
+void ObjImporter::ParseLine(std::string Line, std::vector<float> *Points, std::vector< std::vector<int> > *Faces) {
     if (Line.empty()) {
         return;
     }
@@ -55,7 +55,7 @@ void ObjImporter::ParseLine(std::string Line, std::vector<float> *Points, std::v
 }
 
 void ObjImporter::ParseVerticlesAtLine(std::string Line, std::vector<float> *Points) {
-    std::regex VerticlesRegex("((-|\\+)?\\d\\.\\d)+");
+    std::regex VerticlesRegex("((-|\\+)?\\d+\\.\\d+)+");
     std::smatch Matches;
 
     std::sregex_iterator NextMatch(Line.begin(), Line.end(), VerticlesRegex);
@@ -67,15 +67,20 @@ void ObjImporter::ParseVerticlesAtLine(std::string Line, std::vector<float> *Poi
     }
 }
 
-void ObjImporter::ParseFacesAtLine(std::string Line, std::vector<int> *Faces) {
+void ObjImporter::ParseFacesAtLine(std::string Line, std::vector< std::vector<int> > *Faces) {
     std::regex FacesRegex("(\\d+)+");
     std::smatch Matches;
 
     std::sregex_iterator NextMatch(Line.begin(), Line.end(), FacesRegex);
     std::sregex_iterator End;
+	std::vector<int> LineFaces;
     while (NextMatch != End) {
         std::smatch Match = *NextMatch;
-        Faces->push_back(std::stoi(Match.str().c_str(), 0));
+		LineFaces.push_back(std::stoi(Match.str().c_str(), 0) - 1);
         NextMatch++;
     }
+
+	if (!LineFaces.empty()) {
+		Faces->push_back(LineFaces);
+	}
 }

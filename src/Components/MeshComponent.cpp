@@ -4,7 +4,7 @@
 
 #include "MeshComponent.h"
 
-void MeshComponent::SetFaces(std::vector<int> Faces) {
+void MeshComponent::SetFaces(std::vector< std::vector<int> > Faces) {
     this->Faces = Faces;
 }
 
