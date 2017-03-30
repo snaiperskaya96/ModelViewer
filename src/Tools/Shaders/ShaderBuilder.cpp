@@ -3,7 +3,6 @@
 #include <Misc/Debug.h>
 #include <assert.h>
 #include "ShaderBuilder.h"
-#include <string>
 
 GLuint ShaderBuilder::BuildShader(GLenum ShaderType, const char* ShaderName) {
     for (Shader &S : ShaderList) {
@@ -28,6 +27,11 @@ GLuint ShaderBuilder::BuildShader(GLenum ShaderType, const char* ShaderName) {
     std::string ShaderText;
     while (std::getline(File, FileRow)) {
         ShaderText += FileRow + "\n";
+    }
+
+    if (DebugShaders) {
+        Debug::GlLog("Compiling shader %s (Type: %u):\n", ShaderName, ShaderType);
+        Debug::GlLog(ShaderText.c_str());
     }
 
     GLuint S = glCreateShader(ShaderType);

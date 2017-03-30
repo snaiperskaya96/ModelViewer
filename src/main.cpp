@@ -7,6 +7,8 @@
 
 int main() {
     OpenGl::GetInstance().InitialiseOpenGl();
+    ShaderBuilder::GetInstance().DebugShaders = true;
+
     Debug::Init();
     GLFWwindow* Window = OpenGl::GetInstance().GetWindow();
 

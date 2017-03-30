@@ -43,6 +43,7 @@ public:
         static ShaderBuilder instance;
         return instance;
     }
+    bool DebugShaders = false;
 private:
     std::vector<ShaderProgramme> ShaderProgrammeList;
     std::vector<Shader> ShaderList;

@@ -16,11 +16,11 @@ class ObjImporter {
 public:
     static MeshComponent* CreateMeshFromFileName(const char* ObjFileName);
 private:
-    static void ParseLine(std::string Line, std::vector<float> *Points, std::vector< std::vector<int> > *Faces);
+    static void ParseLine(std::string Line, std::vector<float> *Points, std::vector< std::vector<int> > *Faces, std::vector<int> *RawFaces);
 
     static void ParseVerticlesAtLine(std::string Line, std::vector<float> *Points);
 
-    static void ParseFacesAtLine(std::string Line, std::vector< std::vector<int> > *Faces);
+    static void ParseFacesAtLine(std::string Line, std::vector< std::vector<int> > *Faces, std::vector<int> *RawFaces);
 };
 
 

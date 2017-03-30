@@ -30,6 +30,7 @@ public:
 private:
     MeshComponent* Mesh;
     GLuint ElementsBufferObject = 0;
+    GLuint VertexBufferObject = 0;
 };
 
 
